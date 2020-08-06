@@ -87,7 +87,7 @@
         // })
 
     // 7、Promise.all()
-    /*let p1=new MyPromise((resolve,reject)=>{
+    let p1=new MyPromise((resolve,reject)=>{
         resolve("my-p1")
     }) 
      let p2 = new MyPromise((resolve, reject) => {
@@ -96,10 +96,10 @@
     let p3 = new MyPromise((resolve, reject) => {
             resolve("my-p3")
     }) 
-    */
-    // MyPromise.all([p1,p2,p3]).then(res=>{
-    //     console.log(res)
-    // })
+    
+    MyPromise.all([p1,p2,p3]).then(res=>{
+        console.log(res)
+    })
     // MyPromise.race([p1,p2,p3]).then(res=>{
     //     console.log(res)
     // }).catch(err=>{
