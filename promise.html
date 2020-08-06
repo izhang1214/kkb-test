@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // var p1 = new Promise((resolve, reject) => {
+    //     resolve("p1hh")
+    // })
+    // var p2 = new Promise((resolve, reject) => {
+    //     // resolve("p2hh")
+    //     reject("p2jjj")
+    // })
+    // var p3 = new Promise((resolve, reject) => {
+    //     resolve("p3hh")
+    // })
+    // Promise.all([p1,p2,p3]).then(res=>{
+    //     console.log(res)
+    // })
+    // Promise.race([p1,p2,p3]).then(res=>{
+    //     console.log(res)
+    // })
+    // var p1 = new Promise((resolve, reject) => {
+    //     setTimeout(()=>{
+    //         resolve('成功')
+    //     },2000)
+    // })
+    // p1.then(res=>{
+    //     console.log(res)
+    // }).finally(()=>{    //finally 就是不管 是resolve 还是reject 都会执行，不是立即执行
+    //     console.log("finally")
+    // })
+    var p1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            // resolve('成功')
+            reject("失败")
+        }, 2000)
+    })
+    p1.then(res => {
+        console.log(res)
+    }, err => {
+        console.log(err)
+    }).finally(() => {    //finally 就是不管 是resolve 还是reject 都会执行，不是立即执行
+        console.log("finally")
+    })
+</script>
+
+</html>
