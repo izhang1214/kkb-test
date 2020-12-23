@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>自己封装的promise</h1>
+</body>
+<script src="./mypromise.js"></script>
+<script type="text/javascript">
+    // 在同一个宏任务中，同时有宏任务和微任务时 ，优先执行微任务
+    // 微任务：promise,mutationOberserver监听节点变化的
+    // setTimeout(()=>{
+    //  console.log("setTimeout")   
+    // })
+    // 1 解决promise的三种状态 pendding等待，fulfilled 成功 rejected失败
+    // let myPro = new MyPromise(function (resolve, reject) {
+       
+    //     // resolve('成功')
+    //     reject("失败")
+    // })
+
+    // 2  then 方法中有两个参数: onResolved   onRejected
+    // 这里是2个 then方法，但是只会打印最后一个
+    // myPro.then(res=>{
+    //     console.log("onResolved",res)
+    // },err=>{
+    //     console.log("onRejected",err)
+    // })
+
+    // myPro.then(res=>{
+    //     console.log('222',res)
+    // })  
+
+    // 3 多个 then方法调用问题，(注意  不是链式操作)
+    // myPro.then(res => {
+    //     console.log("onResolved", res)
+    // }, err => {
+    //     console.log("onRejected", err)
+    // })
+
+    // myPro.then(res => {
+    //     console.log('222', res)
+    // },err=>{
+    //     console.log('222',err)
+    // })
+
+    // 4。 执行顺序(宏任务和微任务)
+    // myPro.then(res=>{
+    //     console.log(res,'resolved')
+    // },err=>{
+    //     console.log(err,'rejected')
+    // })
+
+    //  5 、then 的链式调用（then的返还值）
+       /* let p=new MyPromise((resolve,reject)=>{
+            resolve("成功")
+        })
+        p.then(res=>{
+            console.log(res)
+            // return "hello world"
+            return new MyPromise((resolve,reject)=>{
+                resolve("hello Promise return 1")
+            })
+        }).then(res=>{
+            console.log(res)
+            return new MyPromise((resolve,reject)=>{
+                resolve("hello Promise return 2")
+            })
+        }).then(res=>{
+            console.log(res)
+        })
+        */
+    //    6、catch 捕获错误
+        // let p = new MyPromise((resolve, reject) => {
+        //     resolve("成功")
+        //     // reject("错误")
+        // })
+        // p.then(res=>{
+        //     console.log(res,'resolve')
+        // }).catch(err=>{
+        //     console.log(err,'reject')
+        // })
+
+    // 7、Promise.all()
+    let p1=new MyPromise((resolve,reject)=>{
+        resolve("my-p1")
+    }) 
+     let p2 = new MyPromise((resolve, reject) => {
+        resolve("my-p2")
+    }) 
+    let p3 = new MyPromise((resolve, reject) => {
+            resolve("my-p3")
+    }) 
+    
+    MyPromise.all([p1,p2,p3]).then(res=>{
+        console.log(res)
+    })
+    // MyPromise.race([p1,p2,p3]).then(res=>{
+    //     console.log(res)
+    // }).catch(err=>{
+    //     console.log(err)
+    // })
+
+    // finally
+    var p1 = new MyPromise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('成功')
+            // reject("失败")
+        }, 1000)
+    })
+    p1.then(res => {
+        console.log(res)
+    },err=>{
+        console.log(err)
+    }).finally(() => {    //finally 就是不管 是resolve 还是reject 都会执行，不是立即执行
+        console.log("finally")
+    })
+
+</script>
+
+</html>
